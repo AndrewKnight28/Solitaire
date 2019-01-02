@@ -20,16 +20,7 @@ class Stack:
 		self.size = self.top
 		self.top = self.top - 1 
 
-	def show_top(self):
-		if self.isEmpty():
-			print("Stack is empty")
-		print("Top item is",  self.S[self.top]) 
-
-	# def print_stack(self):
-	# 	if self.isEmpty():
-	# 		print("Stack is empty")
-	# 		return
-	# 	print("The Stack is:")
-	# 	for i in range(self.size-1,-1,-1):
-	# 		print("|", self.S[i],"|")
-	# 	print() 
+	#def show_top(self):
+	#	if self.isEmpty():
+	#		print("Stack is empty")
+	#	print("Top item is",  self.S[self.top]) 	
