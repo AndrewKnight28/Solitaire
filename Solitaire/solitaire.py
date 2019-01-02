@@ -43,24 +43,6 @@ for y in range(7):
 
 #prints a card
 def display_card(deck):
-	# if (deck.isEmpty() or deck.S[deck.top].pos == False):
-	# 	print("|~   ~|")
-	# 	print("|-","X","-|")
-	# 	print("|~   ~|")
-	# else:
-	# 	print("|~",deck.S[deck.top].suit,"~|")
-	# 	if(deck.S[deck.top].num == 1) :
-	# 		print("|-","A","-|")
-	# 	elif(deck.S[deck.top].num == 11) :
-	# 		print("|-","J","-|")
-	# 	elif(deck.S[deck.top].num == 12) :
-	# 		print("|-","Q","-|")
-	# 	elif(deck.S[deck.top].num == 13) :
-	# 		print("|-","K","-|")
-	# 	else:
-	# 		print("|-",deck.S[x].num,"-|")
-	# 	print("|~",deck.S[x].suit,"~|")	
-	# 	print()
 	if (deck.isEmpty() or deck.S[deck.top].pos == False):
 		return "[~XX~]"
 	else:
