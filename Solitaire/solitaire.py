@@ -96,8 +96,11 @@ print("\n")
 
 for x in range(len(boardstack)):
 	print("              ", end = ' ')
-	for i in (range(len(boardstack))):
-		print(display_card(boardstack[x], i), end = ' ')
+	for i in reversed((range(len(boardstack)))):
+		try:
+			print(display_card(boardstack[x], i), end = ' ')
+		except IndexError :
+			print("      ", end = ' ')
 	print()
 
 print()
