@@ -1,4 +1,4 @@
-import random
+import random 
 from ds_stacks import Stack
 
 #deckstack cardshownstack(3)               emptystack(s) emptystack(h) emptystack(c) emptystack(d)
@@ -31,25 +31,25 @@ for y in range(7):
 	boardstack.append(Stack())
 
 #prints top card (REMASTERED)
-def display_card(deck):
+def display_card(deck, card_in_deck):
 	num = 0
 	suit = 1
 	pos = 3#so i don't have to change everything
 	if (deck.isEmpty()):
 		return "[    ]"
-	elif (deck.S[deck.top][pos]):
+	elif (deck.S[card_in_deck][pos]):
 		return "[~XX~]"
 	else:
-		if(deck.S[deck.top][num] == 1):
-			return("[~A"+deck.S[deck.top][suit]+"~]")
-		elif(deck.S[deck.top][num] == 11):
-			return("[~J"+deck.S[deck.top][suit]+"~]")
-		elif(deck.S[deck.top][num] == 12):
-			return("[~1"+deck.S[deck.top][suit]+"~]")
-		elif(deck.S[deck.top][num] == 13):
-			return("[~K"+deck.S[deck.top][suit]+"~]")
+		if(deck.S[card_in_deck][num] == 1):
+			return("[~A"+deck.S[card_in_deck][suit]+"~]")
+		elif(deck.S[card_in_deck][num] == 11):
+			return("[~J"+deck.S[card_in_deck][suit]+"~]")
+		elif(deck.S[card_in_deck][num] == 12):
+			return("[~1"+deck.S[card_in_deck][suit]+"~]")
+		elif(deck.S[card_in_deck][num] == 13):
+			return("[~K"+deck.S[card_in_deck][suit]+"~]")
 		else:
-			return("[~"+str(deck.S[deck.top][num])+deck.S[deck.top][suit]+"~]")
+			return("[~"+str(deck.S[card_in_deck][num])+deck.S[card_in_deck][suit]+"~]")
 
 def move_cards(stack1, stack2):	
 	stack2.push(stack1.S[stack1.top])
@@ -73,23 +73,31 @@ def compare_color(stack, card):
 		return 2
 	else:
 		return False #unvalid move
+
+#gameplay will be added		
 for x in range(len(boardstack)):
 	for c in range(x+1):
 		move_cards(deck,boardstack[c])
 		switch_location(boardstack[c], 2)
 
-switch_postion(deck)
-
 for x in range(7):
 	switch_postion(boardstack[x])
 
 print("Cards Left:", deck.top+1, "\n")
-# print(deck.S[deck.top].pos)
-print("",display_card(deck),"                   ",display_card(emptystack[0]),display_card(emptystack[1]),display_card(emptystack[2]),display_card(emptystack[3]),"\n")
+print("",display_card(deck, deck.top),end = ' ')
 
-print("        ", end = ' ')
+for x in reversed(range(3)):
+	print(display_card(cardshownstack, x), end = '')
+print("         ",end = ' ')
 
-	for x in range(len(boardstack)):
-		print(display_card(boardstack[x]), end = ' ')
+for x in range(len(emptystack)):
+	print(display_card(emptystack[x], emptystack[x].top), end = ' ')
+print("\n")
+
+for x in range(len(boardstack)):
+	print("              ", end = ' ')
+	for i in (range(len(boardstack))):
+		print(display_card(boardstack[x], i), end = ' ')
+	print()
 
 print()
