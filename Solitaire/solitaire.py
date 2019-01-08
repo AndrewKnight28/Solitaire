@@ -52,9 +52,12 @@ def display_card(deck, card_in_deck):
 		else:
 			return("[~"+str(deck.S[card_in_deck][num])+deck.S[card_in_deck][suit]+"~]")
 
-def move_cards(stack1, stack2):	
+def move_cards(stack1, stack2):	#source destiantion
 	stack2.push(stack1.S[stack1.top])
 	stack1.pop()
+	if(stack1.S[stack1.top][2] != 0):
+		switch_postion(stack1)
+		
 
 def switch_location(stack, new_location):
 	stack.S[stack.top][2] = new_location
@@ -132,18 +135,24 @@ op = True
 while op: 
 	print("Choose a stack to pick a card or chose \'D\' to reveal: ")
 	f_input = input()#toupper	
-	print("Choose a stack to place the card : ")
-	s_input = input()#toupper
-
-	while (s_input == 'D'):
-		print("Cannot be placed in Deck! : ")
-		s_input = input()
-
-	if(check_location(menu[s_input]) ==  compare_color(menu[s_input], menu[f_input].S[menu[f_input].top])):
-		move_cards(menu[f_input], menu[s_input])
-		switch_location(menu[s_input], check_location(menu[s_input]))
+	if(f_input == 'D'):
+		for i in range(3):
+			move_cards(deck, cardshownstack)
+			switch_postion(cardshownstack)
+			#it stops when deck is empty (will be fixed)
 	else:
-		print("Unvalid Move!")
+		print("Choose a stack to place the card : ")
+		s_input = input()#toupper
+
+		while (s_input == 'D'):
+			print("Cannot be placed in Deck! : ")
+			s_input = input()
+
+		if(check_location(menu[s_input]) ==  compare_color(menu[s_input], menu[f_input].S[menu[f_input].top])):
+			move_cards(menu[f_input], menu[s_input])
+			switch_location(menu[s_input], check_location(menu[s_input]))
+		else:
+			print("Unvalid Move!")
 
 	#DISPLAY
 	print("Cards Left:", deck.top + 1, "\n")
@@ -163,7 +172,7 @@ while op:
 	print("\n")
 
 	print("                  1      2      3      4      5      6      7")
-	for x in range(len(boardstack)):
+	for x in range(len(boardstack) + 2):
 		print("              ", end = ' ')
 		for i in range(len(boardstack)):
 			try:
@@ -172,7 +181,4 @@ while op:
 				print("      ", end = ' ')
 		print()
 
-	print()	
-# if(f_input == 'D'):
-# 	for i in range(3):
-# 		move_cards(deck,cardshownstack)
+	print()
