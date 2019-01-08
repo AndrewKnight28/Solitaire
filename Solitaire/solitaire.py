@@ -67,7 +67,7 @@ def switch_postion(stack):	#shows card
 
 def compare_color(stack, card):
 	suit = 1
-	if (card[suit] == stack.S[stack.top][suit]):
+	if (stack.isEmpty() or card[suit] == stack.S[stack.top][suit]):
 		return 1 #same suit for emptystack
 	#allow to be placed in boardstack
 	elif((card[suit] == 'C' or card[suit] == 'S') and (stack.S[stack.top][suit] == 'H' or stack.S[stack.top][suit] == 'D')):
@@ -79,14 +79,14 @@ def compare_color(stack, card):
 
 def check_location(stack1):#detination
 	location = 2
-	if(stack1.S[stack1.top][location] == 2 ):
-		return 2 #to board
-	elif(stack1.S[stack1.top][location] == 1):
-		return 1 #to empty
+	if(stack1.isEmpty() or stack1.S[stack1.top][location] == 1):
+		return 1#to empty
+	
+	elif(stack1.isEmpty() or stack1.S[stack1.top][location] == 2 ):
+		return 2 #to board 
 	else:
 		return False #unvalid move (cannot be moved to deck or shown)
-
-#gameplay will be added		
+		
 for x in range(len(boardstack)):
 	for c in reversed(range(x + 1)):
 		move_cards(deck,boardstack[x])
@@ -147,7 +147,7 @@ while op:
 		while (s_input == 'D'):
 			print("Cannot be placed in Deck! : ")
 			s_input = input()
-
+		#must do different rules for each stack
 		if(check_location(menu[s_input]) ==  compare_color(menu[s_input], menu[f_input].S[menu[f_input].top])):
 			move_cards(menu[f_input], menu[s_input])
 			switch_location(menu[s_input], check_location(menu[s_input]))
